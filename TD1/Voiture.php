@@ -29,7 +29,7 @@ class Voiture {
     public function setImmatriculation($immatriculation2){
         if (strlen($immatriculation2)==8){
             $this->immatriculation=$immatriculation2;}
-        else echo "L'immatriculation doit être en 8 caractères!!"
+        else echo "L'immatriculation doit être en 8 caractères!!";
         
     }
 
@@ -42,7 +42,7 @@ class Voiture {
 
     //une méthode d'affichage
     public function afficher(){
-        echo" Voiture $this->immatriculation de marque $this->marque (couleur $this->couleur) "
+        echo" Voiture $this->immatriculation de marque $this->marque (couleur $this->couleur) ";
     }
 }
 ?>
