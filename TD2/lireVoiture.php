@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8" /> 
         <?php require_once ("Model.php"); ?>
-        <?php require_once ("../TD1/Voiture.php"); ?> <!--attention Voiture.php n'est pas dans le même dossier-->
+        <?php require_once ("../TD1/Voiture.php"); 
+                require_once("../TD1/Utilisateur.php");
+                require_once("../TD1/Trajet.php");
+        ?> <!--attention Voiture.php n'est pas dans le même dossier-->
     </head>
     <body>
        <?php 
@@ -33,6 +36,9 @@
         //exo 8: j'appelle ma fonction qui se trouve dans la classe Voiture (j'ai recopié celle de l'exo 7 sans oublier d'importer Model.)
 
         Voiture::getAllVoitures();
+        Utilisateur::getAllUtilisateurs();
+        Trajet::getAllTrajets();
+
 
         ?>
     </body>
