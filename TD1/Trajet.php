@@ -19,7 +19,7 @@ class Trajet {
 
     //constructeur générique qui prend un tableau dont les index corresp aux attributs de la classe
     public function __construct($data) {
-        $this->id = $data['id'];
+        $this->id = $data['id']; 
         $this->depart = $data['depart'];
         $this->arrivee = $data['arrivee'];
         $this->date = $data['date'];
