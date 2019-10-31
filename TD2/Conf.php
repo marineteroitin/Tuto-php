@@ -1,5 +1,9 @@
 <?php
 class Conf {
+
+    // la variable debug est un boolean
+    static private $debug = True;
+
     static private $databases = array(
         'hostname' => 'localhost',
         'database' => 'tutoPHP',
@@ -18,6 +22,10 @@ class Conf {
     }
     static public function getPassword(){
         return self::$databases['password'];
+    }
+
+    static public function getDebug() {
+    	return self::$debug;
     }
 
 }
