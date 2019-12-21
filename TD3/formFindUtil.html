@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <form method="post" action="testFindUtil.php">
+            <fieldset>
+                <legend>Mon formulaire: </legend>
+                <p> 
+                    <!--for dans label doit contenir l'id d'un input pour qu'un clic sur le texte du label nous amène directement ds ce champ-->
+                    <label for="id_Trajet">identifiant du trajet </label>:
+                    <input type="number" placeholder="Ex: 10" name="idTrajet" id="id_Trajet" required/>
+                </p> <!--placeholder sert à écrire une valeure par défaut-->
+                
+                <p>
+                    <input type="submit" value="Envoyer" />
+                </p><!--quand l'utilisateur va cliquer sur Envoyer la page creerVoiture.php va se charger (chmp action) et les info vont être transmises dans le query string-->
+            </fieldset>
+        </form>
+
+     </body>
+</html>

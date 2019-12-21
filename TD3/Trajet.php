@@ -1,5 +1,6 @@
 <?php
 require_once ("Model.php");
+require_once ("Utilisateur.php");
 class Trajet {
     private $id;
     private $depart;
@@ -40,9 +41,27 @@ class Trajet {
         $rep = Model::$pdo->query($SQL); 
         $rep->setFetchMode(PDO::FETCH_CLASS, 'Trajet'); //tableau d'objets où les attributs sont les champs de la BDD,mais on précise la classe à laquelle ils appartiennent
         $tab_trajet = $rep->fetchAll();
-        //var_dump($tab_trajet);
         foreach($tab_trajet as $clé=>$trajet){
             $trajet->afficher();
+        }
+    }
+
+    public static function findPassagers($id){
+        //INNER JOIN permet de récupérer des données qui sont liées et dans 2 tables voir: https://www.w3schools.com/sql/sql_join.asp 
+        $SQL="SELECT utilisateur.login, utilisateur.nom, utilisateur.prenom FROM utilisateur INNER JOIN passager ON utilisateur.login = passager.utilisateur_login INNER JOIN trajet ON trajet.id = passager.trajet_id AND trajet.id=:id";
+        // si je met SELECT * j'aurai les données liées des 3 tables
+        //autre requette qui donne directement que ce qu'n veut : utilisateur.login, utilisateur.nom, utilisateur.prenom
+        //SELECT * FROM utilisateur WHERE utilisateur.login IN (SELECT passager.utilisateur_login FROM passager INNER JOIN trajet ON trajet.id=passager.trajet_id AND trajet.id=:id)
+        $req_prep = Model::$pdo->prepare($SQL);
+        $values = array(
+            "id" => $id
+        );
+        // On donne les valeurs et on exécute la requête	 
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur'); //tableau d'objets où les attributs sont les champs de la BDD,mais on précise la classe à laquelle ils appartiennent
+        $tab_utilisateur = $req_prep->fetchAll();
+        foreach($tab_utilisateur as $clé=>$utilisateur){
+            $utilisateur->afficher();
         }
     }
 }
