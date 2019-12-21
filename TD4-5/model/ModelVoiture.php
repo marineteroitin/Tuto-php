@@ -1,5 +1,6 @@
 <?php
-require_once ("Model.php");
+require_once (File::build_path(array('model','Model.php')));
+
 class ModelVoiture {
     private $marque;
     private $couleur;
@@ -112,6 +113,22 @@ class ModelVoiture {
 
         //On retourne pas de résultat donc pas de fetch
 
+
+    }
+
+    public static function delete($immat){
+        $sql = "DELETE FROM voiture WHERE immatriculation=:im";
+        // Préparation de la requête
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "im" => $immat
+        );
+        // On donne les valeurs et on exécute la requête	 
+        $req_prep->execute($values);
+    
+        // On récupère PAS les résultats 
+    
+        //On retourne PAS de résultat donc pas de fetch
 
     }
 }
