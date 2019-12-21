@@ -55,20 +55,21 @@ class ModelVoiture {
     //plus propre et concis de faire un constructeur __construct($data) comme dans le TD1
 
 
-    /*une méthode d'affichage
-    public function afficher(){
+    //une méthode d'affichage
+    /*public function afficher(){
         echo" Voiture $this->immatriculation de marque $this->marque (couleur $this->couleur) ";
-    }
-    */
+    }*/
+
     public static function getAllVoitures(){
         $SQL='SELECT * FROM voiture'; //cette requette lit tous  les éléments de la table voiture
         $rep = Model::$pdo->query($SQL); 
         $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture'); //tableau d'objets où les attributs sont les champs de la BDD,mais on précise la classe à laquelle ils appartiennent
         $tab_voiture = $rep->fetchAll();
+        return $tab_voiture;
         //var_dump($tab_voiture);
-        foreach($tab_voiture as $clé=>$voiture){
+        /*foreach($tab_voiture as $clé=>$voiture){
             $voiture->afficher();
-        }
+        }*/
     }
 
     //une fonction statique = la même pour chaque attribut de la classe (l'attribut plaque d'une voiture n'est pas statique mais le nb de roue =4 l'est car le meme pour tt les voitures)

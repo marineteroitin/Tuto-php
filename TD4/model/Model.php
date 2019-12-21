@@ -1,4 +1,4 @@
-<?php require_once ("Conf.php");
+<?php require_once ("../config/Conf.php");
 
 class Model {
 
