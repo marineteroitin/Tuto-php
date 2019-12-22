@@ -131,5 +131,23 @@ class ModelVoiture {
         //On retourne PAS de résultat donc pas de fetch
 
     }
+
+    public static function update($marque,$couleur,$immat){
+        $sql = "UPDATE voiture SET marque=:m, couleur=:c WHERE immatriculation=:i";
+        // Préparation de la requête
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "i" => $immat,
+            "m" =>$marque,
+            "c" =>$couleur
+        );
+        // On donne les valeurs et on exécute la requête	 
+        $req_prep->execute($values);
+
+        // On récupère PAS les résultats 
+    
+        //On retourne PAS de résultat donc pas de fetch
+
+    }
 }
 ?>

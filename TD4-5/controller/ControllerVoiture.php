@@ -5,31 +5,68 @@ require_once (File::build_path(array('model','ModelVoiture.php'))); // chargemen
 class ControllerVoiture {
     public static function readAll() {
         $tab_v = ModelVoiture::getAllVoitures();     //appel au modèle pour gerer la BD
-
-        require File::build_path(array('view','voiture','list.php'));  //"redirige" vers la vue
+        $controller = 'voiture';
+        $view = 'list';
+        $pagetitle = 'Liste des voitures';
+        require File::build_path(array('view','view.php'));  //"redirige" vers la vue
     }
     public static function read($immat){
         $v = ModelVoiture::getVoitureByImmat($immat);
+        $controller = 'voiture';
         if ($v == false) {
-            require File::build_path(array('view','voiture','error.php')); 
+            $view = 'error';
+            $pagetitle = 'Erreur';
+            require File::build_path(array('view','view.php')); 
         } else {
-            require File::build_path(array('view','voiture','detail.php')); 
+            $view = 'detail';
+            $pagetitle = 'Détail d\'une voiture';
+            require File::build_path(array('view','view.php')); 
         }
     }
 
     public static function create(){
-        require File::build_path(array('view','voiture','create.php'));
+        $controller = 'voiture';
+        $view = 'create';
+        $pagetitle = 'Création d\'une voiture';
+        require File::build_path(array('view','view.php'));
     }
 
     public static function created($immat, $couleur, $marque){
         $voiture = new ModelVoiture($marque,$couleur,$immat);
         $voiture->save();
-        ControllerVoiture::readAll();
+        $tab_v = ModelVoiture::getAllVoitures();     //appel au modèle pour gerer la BD
+        $controller = 'voiture';
+        $view = 'created';
+        $pagetitle = 'Voiture créée avec succès';
+        require File::build_path(array('view','view.php'));
     }
 
     public static function delete($immat){
         ModelVoiture::delete($immat);
-        ControllerVoiture::readAll();
+        $tab_v = ModelVoiture::getAllVoitures();     //appel au modèle pour gerer la BD
+        $controller = 'voiture';
+        $view = 'deleted';
+        $pagetitle = 'Voiture supprimée avec succès';
+        require File::build_path(array('view','view.php'));
     }
+    
+    public static function update($immat){
+        $v = ModelVoiture::getVoitureByImmat($immat);
+        $controller = 'voiture';
+        $view = 'update';
+        $pagetitle = 'Modifier la voiture';
+        require File::build_path(array('view','view.php'));
+
+    }
+
+    public static function updated($immat, $couleur, $marque){
+        ModelVoiture::update($marque,$couleur,$immat);
+        $tab_v = ModelVoiture::getAllVoitures();     //appel au modèle pour gerer la BD
+        $controller = 'voiture';
+        $view = 'updated';
+        $pagetitle = 'Voiture modifiée avec succès';
+        require File::build_path(array('view','view.php'));
+    }
+    
 }
 ?>
